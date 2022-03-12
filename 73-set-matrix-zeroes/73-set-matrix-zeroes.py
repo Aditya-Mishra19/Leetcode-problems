@@ -7,17 +7,17 @@ class Solution:
         n = len(matrix[0])
         
         rows = set()
-        colunms = set()
+        columns = set()
         
         for i in range(m):
             for j in range(n):
                 if matrix[i][j] == 0:
                     rows.add(i)
-                    colunms.add(j)
+                    columns.add(j)
         
         for i in range(m):
             for j in range(n):
-                if i in rows or j in colunms:
+                if i in rows or j in columns:
                     matrix[i][j] = 0
         
         return matrix
