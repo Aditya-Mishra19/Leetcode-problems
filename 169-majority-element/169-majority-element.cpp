@@ -1,25 +1,30 @@
-#include <bits/stdc++.h>
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        map<int, int> freq;
-        for(int i=0; i<nums.size(); i++)
+        int count, ele, freq, n;
+        count = 1;
+        ele = 0;
+        n = nums.size();
+        for(int i=0; i<n; i++)
         {
-            freq[nums[i]]++;
+            if(nums[i] == ele)
+                count +=1;
+            else
+                count -=1;
+            if(count == 0)
+            {
+                ele = nums[i];
+                count += 1;
+            }
         }
-
-        int max = 0;
-        int key = 0;
-        for(auto it: freq)
+        freq = 0;
+        for(int i=0; i<n; i++)
         {
-            if (max <= it.second)
-                max = it.second;
+            if(nums[i] == ele)
+                freq += 1;
         }
-        for(auto it: freq)
-        {
-            if(max == it.second)
-                key = it.first;
-        }
-        return key;
+        if(freq > n/2)
+            return ele;
+        return 0;
     }
 };
