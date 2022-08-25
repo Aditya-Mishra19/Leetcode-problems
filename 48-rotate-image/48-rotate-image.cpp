@@ -12,8 +12,8 @@ public:
             int left = 0, right = n-1;
             while(left < right) {
                 swap(matrix[i][left], matrix[i][right]);
-                ++left;
-                --right;
+                left++;
+                right--;
             }
         }
     }
