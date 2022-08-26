@@ -4,20 +4,38 @@ public:
         int row = matrix.size();
         int col = matrix[0].size();
         
-        vector<vector<int>> temp = matrix;
+        bool rowFlag = false;
+        bool colFlag = false;
         
         for(int i=0; i<row; i++) {
             for(int j=0; j<col; j++) {
+                if(i == 0 && matrix[i][j] == 0)
+                    rowFlag = true;
+                if(j == 0 && matrix[i][j] == 0)
+                    colFlag = true;
                 if(matrix[i][j] == 0) {
-                    for(int k=0; k<col; k++) {
-                        temp[i][k] = 0;
-                    }
-                    for(int k=0; k<row; k++) {
-                        temp[k][j] = 0;
-                    }
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
                 }
             }
         }
-        matrix = temp;
+        for(int i=1; i<row; i++) {
+            for(int j=1; j<col; j++) {
+                if(matrix[0][j] == 0 || matrix[i][0] == 0)
+                    matrix[i][j] = 0;
+                }
+            }
+        
+        if(rowFlag) {
+            for(int i=0; i<col; i++){
+                matrix[0][i] = 0;
+            }
+        }
+        if(colFlag) {
+            for(int i=0; i<row; i++){
+                matrix[i][0] = 0;
+            }
+        }
+        
     }
 };
