@@ -43,20 +43,53 @@ class Solution{
         }
         return true;
     }
+    
+    Node* getMid(Node* head) {
+        Node* slow = head;
+        Node* fast = head -> next;
+        
+        while(fast != NULL && fast -> next != NULL) {
+            fast = fast -> next -> next;
+            slow = slow -> next;
+        }
+        return slow;
+    }
+    Node* reverse(Node* head) {
+        Node* curr = head;
+        Node* prev = NULL;
+        Node* next = NULL;
+        while(curr != NULL) {
+            next = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
   public:
     //Function to check whether the list is palindrome.
     bool isPalindrome(Node *head)
     {
-        vector<int> ans;
+        
         if(head->next == NULL) return true;
+        Node* middle = getMid(head);
         
-        Node* temp = head;
-        while(temp != NULL) {
-            ans.push_back(temp->data);
-            temp = temp -> next;
+        Node* temp = middle -> next;
+        middle -> next = reverse(temp);
+        
+        Node* h1 = head;
+        Node* h2 = middle->next;
+        while(h2 != NULL) {
+            if(h1 -> data != h2 -> data) 
+                return false;
+            h1 = h1 -> next;
+            h2 = h2 -> next;
         }
+        Node* t = middle -> next;
+        middle -> next = reverse(t);
         
-        return checkPalindrome(ans);
+        return true;
+        
     }
 };
 
